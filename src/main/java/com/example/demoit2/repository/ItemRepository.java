@@ -1,0 +1,12 @@
+package com.example.demoit2.repository;
+
+import com.example.demoit2.entity.items.ItemEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
+    List<ItemEntity> findAllByCollectionsId(Long id);
+}
