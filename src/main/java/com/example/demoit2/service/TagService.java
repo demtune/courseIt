@@ -7,17 +7,17 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TagService {
-    Optional<?> findTagById(Long id);
+    Optional<TagEntity> findTagById(Long id);
 
-    Optional<?> findTagsByItemId(Long id);
+    Optional<TagEntity> findTagsByItemId(Long id);
 
     List<TagEntity> findAllTagsByName(String substring);
 
-    Optional<?> findAllTags();
+    List<TagEntity> findAllTags();
 
-    Optional<?> saveTag(TagEntity tag);
+    Optional<TagEntity> saveTag(TagEntity tag);
 
     void deleteTag(Long id);
 
-    void addTagToItem(Long tagId, Long itemId);
+    void addTagToItem(String name, Long itemId);
 }

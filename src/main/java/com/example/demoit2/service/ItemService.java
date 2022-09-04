@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemService {
-    Optional<?> findItemById(Long id);
+    Optional<ItemEntity> findItemById(Long id);
 
-    Optional<?> saveItem(ItemEntity item);
+    ItemEntity saveItem(ItemEntity item);
 
-    Optional<?> getItems();
+    List<ItemEntity> getItems();
 
     void deleteItem(Long id);
 
     List<ItemEntity> findAllItemsByCollectionId(Long id);
 
-    Optional<?> updateItem(ItemEntity item);
+    Optional<ItemEntity> updateItem(ItemEntity item);
 }

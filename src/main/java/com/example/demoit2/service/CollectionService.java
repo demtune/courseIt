@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CollectionService {
-    Optional<?> findCollectionById(Long id);
+    Optional<CollectionEntity> findCollectionById(Long id);
 
-    Optional<?> saveCollection(CollectionEntity collection);
+    CollectionEntity saveCollection(CollectionEntity collection);
 
-    Optional<?> getCollections();
+    List<CollectionEntity> getCollections();
 
     void deleteCollection(Long id);
 
     List<CollectionEntity> findAllCollectionByUserId(Long id);
 
-    Optional<?> updateCollection(CollectionEntity collection);
+    Optional<CollectionEntity> updateCollection(CollectionEntity collection);
 }

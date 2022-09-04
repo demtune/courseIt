@@ -19,21 +19,21 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepository itemRepository;
 
     @Override
-    public Optional<?> findItemById(Long id) {
+    public Optional<ItemEntity> findItemById(Long id) {
         log.info("Item with id:{}", id);
         return itemRepository.findById(id);
     }
 
     @Override
-    public Optional<?> saveItem(ItemEntity item) {
+    public ItemEntity saveItem(ItemEntity item) {
         log.info("Saving new item:{} to database", item.getItemName());
-        return Optional.of(itemRepository.save(item));
+        return itemRepository.save(item);
     }
 
     @Override
-    public Optional<?> getItems() {
+    public List<ItemEntity> getItems() {
         log.info("Getting all items");
-        return Optional.of(itemRepository.findAll());
+        return itemRepository.findAll();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Optional<?> updateItem(ItemEntity item) {
+    public Optional<ItemEntity> updateItem(ItemEntity item) {
         itemRepository.findById(item.getId())
                 .orElseThrow(() -> new ItemNotFoundException("Item not found in database"));
         return Optional.of(this.saveItem(item));

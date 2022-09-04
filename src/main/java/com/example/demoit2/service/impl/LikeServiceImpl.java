@@ -18,7 +18,7 @@ public class LikeServiceImpl implements LikeService {
     private final LikeRepository likeRepository;
 
     @Override
-    public Optional<?> addLike(LikeEntity like) {
+    public Optional<LikeEntity> addLike(LikeEntity like) {
         log.info("Like for item:{}", like.getItem().getId());
         return Optional.of(likeRepository.save(like));
     }

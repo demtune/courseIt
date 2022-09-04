@@ -29,7 +29,6 @@ public class ItemEntity {
     private CollectionEntity collections;
 
     @ManyToMany
-    @JsonIgnore
     @JoinTable(name = "items_tags",
             joinColumns = {@JoinColumn(name = "item_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id", referencedColumnName = "id")})

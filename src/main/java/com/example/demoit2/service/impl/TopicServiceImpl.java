@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,15 +18,15 @@ public class TopicServiceImpl implements TopicService {
     private final TopicRepository topicRepository;
 
     @Override
-    public Optional<?> saveTopic(TopicEntity topic) {
+    public TopicEntity saveTopic(TopicEntity topic) {
         log.info("Saving new topic:{} to database", topic.getTopicName());
-        return Optional.of(topicRepository.save(topic));
+        return topicRepository.save(topic);
     }
 
     @Override
-    public Optional<?> getTopics() {
+    public List<TopicEntity> getTopics() {
         log.info("Getting all topics");
-        return Optional.of(topicRepository.findAll());
+        return topicRepository.findAll();
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.example.demoit2.entity.items.LikeEntity;
 import java.util.Optional;
 
 public interface LikeService {
-    Optional<?> addLike(LikeEntity like);
+    Optional<LikeEntity> addLike(LikeEntity like);
 
     void removeLike(Long userId, Long itemId);
 }

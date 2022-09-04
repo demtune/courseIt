@@ -1,9 +1,6 @@
 package com.example.demoit2.service.impl;
 
-import com.example.demoit2.entity.items.ItemEntity;
 import com.example.demoit2.entity.items.TagEntity;
-import com.example.demoit2.entity.users.RoleEntity;
-import com.example.demoit2.entity.users.UserEntity;
 import com.example.demoit2.repository.ItemRepository;
 import com.example.demoit2.repository.TagRepository;
 import com.example.demoit2.service.TagService;
@@ -31,15 +28,15 @@ public class TagServiceImpl implements TagService {
     private final DataSource dataSource;
 
     @Override
-    public Optional<?> findTagById(Long id) {
+    public Optional<TagEntity> findTagById(Long id) {
         log.info("Tag with id:{}", id);
-        return Optional.of(tagRepository.findById(id));
+        return tagRepository.findById(id);
     }
 
     @Override
-    public Optional<?> findTagsByItemId(Long id) {
+    public Optional<TagEntity> findTagsByItemId(Long id) {
         log.info("Tags with item id:{}", id);
-        return Optional.of(tagRepository.findAllByItemId(id));
+        return tagRepository.findAllByItemId(id);
     }
 
     @Override
@@ -52,13 +49,13 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
-    public Optional<?> findAllTags() {
+    public List<TagEntity> findAllTags() {
         log.info("Getting all tags");
-        return Optional.of(tagRepository.findAll());
+        return tagRepository.findAll();
     }
 
     @Override
-    public Optional<?> saveTag(TagEntity tag) {
+    public Optional<TagEntity> saveTag(TagEntity tag) {
         log.info("Saving new tag:{} to database", tag.getTagName());
         return Optional.of(tagRepository.save(tag));
     }
@@ -71,11 +68,12 @@ public class TagServiceImpl implements TagService {
 
     @Override
     @Transactional
-    public void addTagToItem(Long tagId, Long itemId) {
-        log.info("Add tag:{} to item:{}", tagId, itemId);
-        var tag = tagRepository.findById(tagId);
+    public void addTagToItem(String name, Long itemId) {
+        log.info("Add tag:{} to item:{}", name, itemId);
+
+        var tag = tagRepository.findByTagName(name)
+                .orElseGet(() -> tagRepository.save(new TagEntity(name)));
         var item = itemRepository.findById(itemId);
-        item.get().getTags().add(tag.get());
-        tag.get().getItem().add(item.get());
+        item.map(i -> i.getTags().add(tag));
     }
 }

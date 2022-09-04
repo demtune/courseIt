@@ -1,5 +1,6 @@
 package com.example.demoit2.entity.items;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,11 +24,17 @@ public class TagEntity {
     private String tagName;
 
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<ItemEntity> item;
 
     public TagEntity(Long id, String tagName) {
         this.id = id;
+        this.tagName = tagName;
+    }
+
+    public TagEntity(String tagName) {
+        this.id = null;
         this.tagName = tagName;
     }
 }

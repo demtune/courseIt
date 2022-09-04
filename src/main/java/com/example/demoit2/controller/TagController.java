@@ -35,8 +35,8 @@ public class TagController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addTagToItem(@RequestParam Long tagId, @RequestParam Long itemId) {
-        tagService.addTagToItem(tagId, itemId);
+    public ResponseEntity<?> addTagToItem(@RequestParam String tagName, @RequestParam Long itemId) {
+        tagService.addTagToItem(tagName, itemId);
         return ResponseEntity.ok().build();
     }
 

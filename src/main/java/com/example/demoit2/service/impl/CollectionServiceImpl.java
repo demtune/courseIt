@@ -20,21 +20,21 @@ public class CollectionServiceImpl implements CollectionService {
     private final CollectionRepository collectionRepository;
 
     @Override
-    public Optional<?> findCollectionById(Long id) {
+    public Optional<CollectionEntity> findCollectionById(Long id) {
         log.info("Collection with id:{}", id);
         return collectionRepository.findById(id);
     }
 
     @Override
-    public Optional<?> saveCollection(CollectionEntity collection) {
+    public CollectionEntity saveCollection(CollectionEntity collection) {
         log.info("Saving new collection:{} to database", collection.getCollectionName());
-        return Optional.of(collectionRepository.save(collection));
+        return collectionRepository.save(collection);
     }
 
     @Override
-    public Optional<?> getCollections() {
+    public List<CollectionEntity> getCollections() {
         log.info("Getting all collections");
-        return Optional.of(collectionRepository.findAll());
+        return collectionRepository.findAll();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     @Transactional
-    public Optional<?> updateCollection(CollectionEntity collection) {
+    public Optional<CollectionEntity> updateCollection(CollectionEntity collection) {
         collectionRepository.findById(collection.getId())
                 .orElseThrow(() -> new CollectionNotFoundException("Collection not found in database"));
         log.info("Saving new collection:{} to database", collection.getCollectionName());
